@@ -2,8 +2,8 @@ const config = {
   use: {
     baseURL: 'http://localhost:3000',
     browserName: 'chromium',
-    headless: true,
   },
+  reporter: process.env.CI ? 'github' : 'list',
   webServer: {
     command: 'node src/index.js',
     port: 3000,

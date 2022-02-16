@@ -1,0 +1,13 @@
+{
+  "devDependencies": {
+    "@playwright/test": "^1.19.1"
+  },
+  "scripts": {
+    "test": "PWDEBUG=1 playwright test",
+    "test:ci": "playwright test"
+  },
+  "name": "playright",
+  "version": "1.0.0",
+  "main": "index.js",
+  "license": "MIT"
+}

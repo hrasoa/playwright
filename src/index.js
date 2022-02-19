@@ -10,9 +10,9 @@ function html(content) {
   return (`
       <!doctype html>
       <html>
-        <body>
-            ${content}
-        </body>
+      <body>
+          ${content}
+      </body>
       </html>`
   );
 }

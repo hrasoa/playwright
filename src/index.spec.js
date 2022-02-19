@@ -14,6 +14,8 @@ test('Basic test', async ({ context, page, baseURL }) => {
     await blog.goto(baseURL + '/blog');
     const title = blog.locator('h1');
     await expect(title).toHaveText('Blog');
+    const text = blog.locator('#text');
+    await expect(text).toHaveText('My YC app: Dropbox - Throw away your USB drive');
   }
 
   await Promise.all([testHome(), testBlog()]);

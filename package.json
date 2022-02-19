@@ -9,5 +9,9 @@
   "name": "playright",
   "version": "1.0.0",
   "main": "index.js",
-  "license": "MIT"
+  "license": "MIT",
+  "dependencies": {
+    "fastify": "^3.27.2",
+    "fastify-static": "^4.5.0"
+  }
 }

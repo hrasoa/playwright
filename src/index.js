@@ -1,16 +1,42 @@
-const http = require('http');
+const path = require('path');
+const fastify = require('fastify')()
 
-const requestListener = function(req, res) {
-  res.writeHead(200);
-  switch(req.url) {
-    case '/blog':
-      res.end('<h1>Blog</h1>');
-      break;
-    default:
-      res.end('<h1>Hello, World!</h1>');
-      break;
+fastify.register(require('fastify-static'), {
+  root: path.join(__dirname, 'public'),
+  prefix: '/public/',
+})
+
+function html(content) {
+  return (`
+      <!doctype html>
+      <html>
+        <body>
+            ${content}
+        </body>
+      </html>`
+  );
+}
+
+fastify.get('/', async (request, reply) => {
+  reply.status(200)
+    .type('text/html')
+    .send(html('<h1>Hello, World!</h1>'));
+})
+
+fastify.get('/blog', async (request, reply) => {
+  reply.status(200)
+    .type('text/html')
+    .send(html('<h1>Blog</h1><div id="text"></div><script src="/public/hn.js"></script>'));
+})
+
+// Run the server!
+const start = async () => {
+  try {
+    await fastify.listen(3000)
+  } catch (err) {
+    fastify.log.error(err)
+    process.exit(1)
   }
 }
 
-const server = http.createServer(requestListener);
-server.listen(3000);
+start();

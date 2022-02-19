@@ -11,11 +11,14 @@ test('Basic test', async ({ context, page, baseURL }) => {
   }
 
   const testBlog = async () => {
-    await blog.goto(baseURL + '/blog');
+    const [response] = await Promise.all([
+      blog.waitForResponse('**/8863.json').then(r => r.json()),
+      blog.goto(baseURL + '/blog')
+    ]);
     const title = blog.locator('h1');
     await expect(title).toHaveText('Blog');
     const text = blog.locator('#text');
-    await expect(text).toHaveText('My YC app: Dropbox - Throw away your USB drive');
+    await expect(text).toHaveText(response.title);
   }
 
   await Promise.all([testHome(), testBlog()]);
